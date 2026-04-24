@@ -1,0 +1,168 @@
+:root {
+    --senai-red: #E30613; /* Vermelho oficial do SENAI */
+    --bg-color: #f4f6f8;  /* Cinza claro para o fundo */
+    --card-bg: #ffffff;   /* Fundo branco para os cards */
+    --text-dark: #333333; /* Texto escuro */
+    --text-light: #777777;/* Texto de status */
+}
+
+/* Reseta as margens e define uma fonte padrão */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Fundo da página e alinhamento */
+body {
+    background-color: var(--bg-color);
+    color: var(--text-dark);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    padding: 30px 15px;
+}
+
+/* ========================================= */
+/* CABEÇALHO E LOGO                          */
+/* ========================================= */
+#main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-bottom: 40px;
+    width: 100%;
+}
+
+#logo-senai {
+    display: block;
+    max-width: 250px; /* Tamanho máximo da logo */
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    margin: 0 auto 20px auto; /* Centraliza horizontalmente */
+}
+
+#main h1 {
+    font-size: 2.2rem;
+    color: var(--text-dark);
+    text-transform: uppercase;
+    border-bottom: 4px solid var(--senai-red);
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+/* ========================================= */
+/* GRID DAS LÂMPADAS (DASHBOARD)             */
+/* ========================================= */
+.dashboard {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    max-width: 1000px;
+}
+
+/* Estilo individual de cada Cômodo */
+.card {
+    background-color: var(--card-bg);
+    width: 220px;
+    padding: 25px 20px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* Borda superior vermelha para remeter ao SENAI */
+    border-top: 6px solid var(--senai-red);
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px); /* Efeito de levantar ao passar o mouse */
+}
+
+.card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+    color: var(--text-dark);
+}
+
+/* ========================================= */
+/* IMAGEM E ESTADOS DA LÂMPADA               */
+/* ========================================= */
+.card img {
+    width: 90px;
+    height: 120px;
+    object-fit: contain;
+    transition: all 0.4s ease-in-out;
+    margin-bottom: 15px;
+}
+
+/* ESTADO: DESLIGADA */
+.desligada {
+    filter: grayscale(100%) opacity(30%);
+}
+
+/* ESTADO: LIGADA */
+.ligada {
+    /* Remove o cinza e adiciona o brilho amarelo */
+    filter: grayscale(0%) brightness(120%) drop-shadow(0px 0px 25px rgba(241, 196, 15, 0.8));
+    animation: pulsar-luz 2s infinite alternate;
+}
+
+/* Texto de Status ("Lâmpada ligada" / "Desligada") */
+div[id^="status-"] {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-light);
+    margin-bottom: 20px;
+    height: 20px;
+}
+
+/* ========================================= */
+/* BOTÕES                                    */
+/* ========================================= */
+.buttons {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+}
+
+.buttons button {
+    flex: 1;
+    padding: 10px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #ffffff;
+    background-color: var(--senai-red);
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+/* Hover e Clique do botão */
+.buttons button:hover {
+    background-color: #b3000b; /* Vermelho mais escuro */
+}
+
+.buttons button:active {
+    transform: scale(0.95);
+}
+
+/* ========================================= */
+/* ANIMAÇÕES                                 */
+/* ========================================= */
+@keyframes pulsar-luz {
+    from {
+        filter: grayscale(0%) brightness(110%) drop-shadow(0px 0px 15px rgba(241, 196, 15, 0.6));
+    }
+    to {
+        filter: grayscale(0%) brightness(130%) drop-shadow(0px 0px 30px rgba(241, 196, 15, 0.9));
+    }
+}

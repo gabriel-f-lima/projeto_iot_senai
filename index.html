@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel de Controle - Casa Inteligente</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div id="main">
+        <img src="logo.png" alt="Logo SENAI" id="logo-senai">
+        <h1>Controle de Lâmpadas</h1>
+    </div>
+
+    <div class="dashboard">
+        <div class="card">
+            <h3>Sala</h3>
+            <img src="lampada.png" id="img-sala" class="desligada">
+            <div id="status-sala">Desligada</div>
+            <div class="buttons">
+                <button onclick="ligarLampadaSala()">Ligar</button>
+                <button onclick="desligarLampadaSala()">Desligar</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Cozinha</h3>
+            <img src="lampada.png" id="img-cozinha" class="desligada">
+            <div id="status-cozinha">Desligada</div>
+            <div class="buttons">
+                <button onclick="ligarLampadaCozinha()">Ligar</button>
+                <button onclick="desligarLampadaCozinha()">Desligar</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Quarto 1</h3>
+            <img src="lampada.png" id="img-quarto1" class="desligada">
+            <div id="status-quarto1">Desligada</div>
+            <div class="buttons">
+                <button onclick="ligarLampadaQuarto1()">Ligar</button>
+                <button onclick="desligarLampadaQuarto1()">Desligar</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Quarto 2</h3>
+            <img src="lampada.png" id="img-quarto2" class="desligada">
+            <div id="status-quarto2">Desligada</div>
+            <div class="buttons">
+                <button onclick="ligarLampadaQuarto2()">Ligar</button>
+                <button onclick="desligarLampadaQuarto2()">Desligar</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="mqttws31.js"></script>
+    <script src="index.js"></script>
+</body>
+</html>
