@@ -1,6 +1,8 @@
 let clientWeb = null;
+const sirene = new Audio('sirene.mp3');
 const clientId = "Esp32GFL_" + Math.floor(Math.random() * 10000); 
 clientWeb = new Paho.MQTT.Client("broker.hivemq.com", 8884, clientId);
+
 
 // =========================================================
 // FUNÇÃO PARA TRAVAR/DESTRAVAR BOTÕES
@@ -53,7 +55,7 @@ function ligarLampadaSala() {
     if ("vibrate" in navigator) {
             navigator.vibrate(200); 
         }
-        
+
     const msg = new Paho.MQTT.Message('');
     msg.destinationName = "senai510/lampada/sala/ligar";
     clientWeb.send(msg);
@@ -257,6 +259,9 @@ function piscarAlternado() {
     }
 
     console.log("Iniciando piscar alternado com vibração...");
+
+    sirene.play();
+    sirene.loop = true;
     
     intervaloPiscar = setInterval(() => {
         estadoPisca = !estadoPisca; 
@@ -285,6 +290,10 @@ function piscarAlternado() {
 }
 
 function pararPiscar() {
+    
+    sirene.pause();
+    sirene.loop = false;
+
     if (intervaloPiscar !== null) {
         clearInterval(intervaloPiscar); 
         intervaloPiscar = null;         
