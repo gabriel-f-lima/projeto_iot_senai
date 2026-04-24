@@ -207,3 +207,49 @@ div[id^="status-"] {
         font-size: 1rem;
     }
 }
+/* ========================================= */
+/* CONTROLES GLOBAIS (LIGAR/DESLIGAR TODAS)  */
+/* ========================================= */
+.controles-globais {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 1000px;
+}
+
+.btn-global {
+    padding: 15px 30px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+    /* Faz os botões ficarem grandes no celular e dividirem o espaço */
+    flex: 1; 
+    max-width: 300px;
+}
+
+/* Verde para ligar todas */
+.btn-ligar-todas {
+    background-color: #E30613;
+}
+.btn-ligar-todas:hover {
+    background-color: #b3000b;
+}
+
+/* Um vermelho mais escuro ou cinza chumbo para desligar todas */
+.btn-desligar-todas {
+    background-color: #E30613;
+}
+.btn-desligar-todas:hover {
+    background-color: #b3000b;
+}
+
+.btn-global:active {
+    transform: scale(0.95);
+}

@@ -167,3 +167,36 @@ function desligarLampadaCozinha() {
     msg.destinationName = "senai510/lampada/cozinha/desligar";
     clientWeb.send(msg);
 }
+function ligarTodas() {
+    if (!clientWeb.isConnected()) { console.log("Aguarde a conexão!"); return; }
+
+    const lampadas = document.querySelectorAll(".card img");
+    const statusLampadas = document.querySelectorAll(".card #status-sala, .card #status-cozinha, .card #status-quarto1, .card #status-quarto2");
+
+    console.log("Ligando todas as lâmpadas");
+    statusLampadas.forEach(status => status.textContent = "Lâmpada ligada");
+    lampadas.forEach(lampada => {
+        lampada.classList.remove("desligada");
+        lampada.classList.add("ligada");
+    });
+    
+    const msg = new Paho.MQTT.Message('');
+    msg.destinationName = "senai510/lampada/ligar";
+    clientWeb.send(msg);
+}
+function desligarTodas() {
+    if (!clientWeb.isConnected()) { console.log("Aguarde a conexão!"); return; }
+    const lampadas = document.querySelectorAll(".card img");
+    const statusLampadas = document.querySelectorAll(".card #status-sala, .card #status-cozinha, .card #status-quarto1, .card #status-quarto2");
+
+    console.log("Desligando todas as lâmpadas");
+    statusLampadas.forEach(status => status.textContent = "Lâmpada desligada");
+    lampadas.forEach(lampada => {
+        lampada.classList.remove("ligada");
+        lampada.classList.add("desligada");
+    });
+    
+    const msg = new Paho.MQTT.Message('');
+    msg.destinationName = "senai510/lampada/desligar";
+    clientWeb.send(msg);
+}
