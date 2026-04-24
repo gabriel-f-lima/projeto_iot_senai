@@ -1,20 +1,45 @@
 let clientWeb = null;
-// Número aleatório no ID para o broker não desconectar
 const clientId = "Esp32GFL_" + Math.floor(Math.random() * 10000); 
 clientWeb = new Paho.MQTT.Client("broker.hivemq.com", 8884, clientId);
 
+// =========================================================
+// FUNÇÃO PARA TRAVAR/DESTRAVAR BOTÕES
+// =========================================================
+function controlarBotoes(desabilitar) {
+    const botoes = document.querySelectorAll("button");
+    botoes.forEach(botao => {
+        botao.disabled = desabilitar; // Trava a lógica do HTML
+        if (desabilitar) {
+            botao.classList.add("btn-desabilitado"); // Adiciona o visual cinza
+        } else {
+            botao.classList.remove("btn-desabilitado"); // Remove o visual cinza
+        }
+    });
+}
+
+// 1. Trava todos os botões assim que a página carrega
+controlarBotoes(true);
+
+// =========================================================
+// CONEXÃO MQTT
+// =========================================================
 clientWeb.connect({
     useSSL: true,
     onSuccess: function() {
-        console.log("Conectado ao broker MQTT");
+        console.log("Conectado ao broker MQTT com sucesso!");
+        // 2. Destrava os botões apenas quando conectar
+        controlarBotoes(false); 
     },
     onFailure: function(){
         console.log("Falha ao conectar ao broker MQTT");
     }
 });
 
+
 // ========================== SALA ==========================
 function ligarLampadaSala() {
+    if (!clientWeb.isConnected()) { console.log("Aguarde a conexão!"); return; }
+
     const lampada = document.getElementById("img-sala");
     const statuslampada = document.getElementById("status-sala");
     
@@ -29,6 +54,8 @@ function ligarLampadaSala() {
 }
 
 function desligarLampadaSala() {
+    if (!clientWeb.isConnected()) { console.log("Aguarde a conexão!"); return; }
+
     const lampada = document.getElementById("img-sala");
     const statuslampada = document.getElementById("status-sala");
 
@@ -44,6 +71,8 @@ function desligarLampadaSala() {
 
 // ========================== QUARTO 1 ==========================
 function ligarLampadaQuarto1() {
+    if (!clientWeb.isConnected()) { console.log("Aguarde a conexão!"); return; }
+
     const lampada = document.getElementById("img-quarto1");
     const statuslampada = document.getElementById("status-quarto1");
 
@@ -58,6 +87,8 @@ function ligarLampadaQuarto1() {
 }
 
 function desligarLampadaQuarto1() {
+    if (!clientWeb.isConnected()) { console.log("Aguarde a conexão!"); return; }
+
     const lampada = document.getElementById("img-quarto1");
     const statuslampada = document.getElementById("status-quarto1");
 
@@ -73,6 +104,8 @@ function desligarLampadaQuarto1() {
 
 // ========================== QUARTO 2 ==========================
 function ligarLampadaQuarto2() {
+    if (!clientWeb.isConnected()) { console.log("Aguarde a conexão!"); return; }
+
     const lampada = document.getElementById("img-quarto2");
     const statuslampada = document.getElementById("status-quarto2");
 
@@ -87,6 +120,8 @@ function ligarLampadaQuarto2() {
 }
 
 function desligarLampadaQuarto2() {
+    if (!clientWeb.isConnected()) { console.log("Aguarde a conexão!"); return; }
+
     const lampada = document.getElementById("img-quarto2");
     const statuslampada = document.getElementById("status-quarto2");
 
@@ -102,6 +137,8 @@ function desligarLampadaQuarto2() {
 
 // ========================== COZINHA ==========================
 function ligarLampadaCozinha() {
+    if (!clientWeb.isConnected()) { console.log("Aguarde a conexão!"); return; }
+
     const lampada = document.getElementById("img-cozinha");
     const statuslampada = document.getElementById("status-cozinha");
 
@@ -116,6 +153,8 @@ function ligarLampadaCozinha() {
 }
 
 function desligarLampadaCozinha() {
+    if (!clientWeb.isConnected()) { console.log("Aguarde a conexão!"); return; }
+
     const lampada = document.getElementById("img-cozinha");
     const statuslampada = document.getElementById("status-cozinha");
 
