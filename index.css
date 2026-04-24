@@ -26,6 +26,7 @@ body {
     align-items: center;
     min-height: 100vh;
     padding: 30px 15px;
+    transition: background-color 0.2s ease;
 }
 
 /* ========================================= */
@@ -57,6 +58,13 @@ body {
     border-bottom: 4px solid var(--senai-red);
     display: inline-block;
     padding-bottom: 5px;
+}
+.fundo-piscante {
+    background-color: #1a1a1a !important; /* Fundo bem escuro */
+}
+
+.fundo-piscante h1 {
+    color: #ffffff !important; /* Deixa o título branco para não sumir no escuro */
 }
 
 /* ========================================= */
@@ -252,4 +260,19 @@ div[id^="status-"] {
 
 .btn-global:active {
     transform: scale(0.95);
+}
+
+.btn-piscar {
+    background-color: #6f42c1;
+}
+.btn-piscar:hover {
+    background-color: #59339d;
+}
+
+/* Botão de Parar (Laranja) */
+.btn-parar {
+    background-color: #fd7e14;
+}
+.btn-parar:hover {
+    background-color: #e06c0c;
 }

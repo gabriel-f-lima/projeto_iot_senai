@@ -27,11 +27,13 @@ clientWeb.connect({
     useSSL: true,
     onSuccess: function() {
         console.log("Conectado ao broker MQTT com sucesso!");
+        alert("Sistema conectado com sucesso!");
         // 2. Destrava os botões apenas quando conectar
         controlarBotoes(false); 
     },
     onFailure: function(){
         console.log("Falha ao conectar ao broker MQTT");
+        alert("Falha ao conectar o sistema. Verifique sua conexão e tente novamente.");
     }
 });
 
@@ -199,4 +201,65 @@ function desligarTodas() {
     const msg = new Paho.MQTT.Message('');
     msg.destinationName = "senai510/lampada/desligar";
     clientWeb.send(msg);
+}
+
+// ========================== PISCAR ALTERNADO ==========================
+
+// ESTAS DUAS LINHAS SÃO OBRIGATÓRIAS E FICAM FORA DA FUNÇÃO 👇
+let intervaloPiscar = null; 
+let estadoPisca = false;
+
+function piscarAlternado() {
+    if (!clientWeb.isConnected()) { console.log("Aguarde a conexão!"); return; }
+
+    if (intervaloPiscar !== null) {
+        console.log("As lâmpadas já estão piscando!");
+        return; 
+    }
+
+    console.log("Iniciando piscar alternado com vibração...");
+    
+    intervaloPiscar = setInterval(() => {
+        estadoPisca = !estadoPisca; 
+
+        // 1. Faz o fundo da tela piscar (alterna a classe no <body>)
+        document.body.classList.toggle("fundo-piscante", estadoPisca);
+
+        // 2. Faz o celular vibrar por 200 milissegundos (Se for Android)
+        if ("vibrate" in navigator) {
+            navigator.vibrate(200); 
+        }
+
+        // 3. Alterna as lâmpadas via MQTT
+        if (estadoPisca) {
+            ligarLampadaSala();
+            ligarLampadaQuarto1();
+            desligarLampadaCozinha();
+            desligarLampadaQuarto2();
+        } else {
+            desligarLampadaSala();
+            desligarLampadaQuarto1();
+            ligarLampadaCozinha();
+            ligarLampadaQuarto2();
+        }
+    }, 1000); // 1000 ms = 1 segundo
+}
+
+function pararPiscar() {
+    if (intervaloPiscar !== null) {
+        clearInterval(intervaloPiscar); 
+        intervaloPiscar = null;         
+        console.log("Piscar alternado interrompido.");
+        
+        // 1. Remove a cor escura do fundo da tela
+        document.body.classList.remove("fundo-piscante");
+
+        // 2. Para qualquer vibração que ainda esteja acontecendo
+        if ("vibrate" in navigator) {
+            navigator.vibrate(0); 
+        }
+        
+        // 3. Desliga as lâmpadas e finaliza
+        desligarTodas(); 
+    }
 }
