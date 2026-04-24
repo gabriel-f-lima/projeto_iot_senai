@@ -1,3 +1,6 @@
+/* ========================================= */
+/* VARIÁVEIS E CORES SENAI SP                */
+/* ========================================= */
 :root {
     --senai-red: #E30613; /* Vermelho oficial do SENAI */
     --bg-color: #f4f6f8;  /* Cinza claro para o fundo */
@@ -26,7 +29,7 @@ body {
 }
 
 /* ========================================= */
-/* CABEÇALHO E LOGO                          */
+/* CABEÇALHO E LOGO (MOBILE FIRST)           */
 /* ========================================= */
 #main {
     display: flex;
@@ -34,21 +37,21 @@ body {
     align-items: center;
     justify-content: center;
     text-align: center;
-    margin-bottom: 40px;
+    margin-bottom: 30px;
     width: 100%;
 }
 
 #logo-senai {
     display: block;
-    max-width: 250px; /* Tamanho máximo da logo */
+    max-width: 180px; /* Logo um pouco menor no celular */
     width: 100%;
     height: auto;
     object-fit: contain;
-    margin: 0 auto 20px auto; /* Centraliza horizontalmente */
+    margin: 0 auto 15px auto;
 }
 
 #main h1 {
-    font-size: 2.2rem;
+    font-size: 1.8rem; /* Fonte um pouco menor no celular */
     color: var(--text-dark);
     text-transform: uppercase;
     border-bottom: 4px solid var(--senai-red);
@@ -63,32 +66,33 @@ body {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 30px;
+    gap: 20px; /* Espaço menor entre cards no celular */
+    width: 100%;
     max-width: 1000px;
 }
 
-/* Estilo individual de cada Cômodo */
+/* Estilo individual de cada Cômodo no Celular */
 .card {
     background-color: var(--card-bg);
-    width: 220px;
+    width: 100%;
+    max-width: 320px; /* Expande para ocupar a tela do celular */
     padding: 25px 20px;
     border-radius: 12px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* Borda superior vermelha para remeter ao SENAI */
     border-top: 6px solid var(--senai-red);
     transition: transform 0.3s ease;
 }
 
 .card:hover {
-    transform: translateY(-5px); /* Efeito de levantar ao passar o mouse */
+    transform: translateY(-5px);
 }
 
 .card h3 {
     font-size: 1.3rem;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     color: var(--text-dark);
 }
 
@@ -96,26 +100,22 @@ body {
 /* IMAGEM E ESTADOS DA LÂMPADA               */
 /* ========================================= */
 .card img {
-    width: 90px;
-    height: 120px;
+    width: 80px;
+    height: 110px;
     object-fit: contain;
     transition: all 0.4s ease-in-out;
     margin-bottom: 15px;
 }
 
-/* ESTADO: DESLIGADA */
 .desligada {
     filter: grayscale(100%) opacity(30%);
 }
 
-/* ESTADO: LIGADA */
 .ligada {
-    /* Remove o cinza e adiciona o brilho amarelo */
     filter: grayscale(0%) brightness(120%) drop-shadow(0px 0px 25px rgba(241, 196, 15, 0.8));
     animation: pulsar-luz 2s infinite alternate;
 }
 
-/* Texto de Status ("Lâmpada ligada" / "Desligada") */
 div[id^="status-"] {
     font-size: 1rem;
     font-weight: 600;
@@ -135,24 +135,33 @@ div[id^="status-"] {
 
 .buttons button {
     flex: 1;
-    padding: 10px;
-    font-size: 1rem;
+    padding: 14px 10px; /* Botões mais gordinhos para facilitar o clique no touch */
+    font-size: 1.05rem;
     font-weight: bold;
     color: #ffffff;
     background-color: var(--senai-red);
     border: none;
-    border-radius: 6px;
+    border-radius: 8px;
     cursor: pointer;
     transition: background-color 0.2s, transform 0.1s;
 }
 
-/* Hover e Clique do botão */
 .buttons button:hover {
-    background-color: #b3000b; /* Vermelho mais escuro */
+    background-color: #b3000b;
 }
 
 .buttons button:active {
     transform: scale(0.95);
+}
+
+/* Botão travado enquanto o MQTT não conecta */
+.btn-desabilitado {
+    background-color: #cccccc !important;
+    color: #888888 !important;
+    cursor: not-allowed !important;
+    transform: none !important;
+    box-shadow: none !important;
+    opacity: 0.7;
 }
 
 /* ========================================= */
@@ -167,12 +176,34 @@ div[id^="status-"] {
     }
 }
 
-/* Classe para quando o botão estiver desabilitado (sem conexão) */
-.btn-desabilitado {
-    background-color: #cccccc !important;
-    color: #888888 !important;
-    cursor: not-allowed !important;
-    transform: none !important;
-    box-shadow: none !important;
-    opacity: 0.7;
+/* ========================================= */
+/* AJUSTES PARA COMPUTADORES (TELAS GRANDES) */
+/* ========================================= */
+@media (min-width: 768px) {
+    #logo-senai {
+        max-width: 250px;
+        margin-bottom: 20px;
+    }
+
+    #main h1 {
+        font-size: 2.2rem;
+    }
+
+    .dashboard {
+        gap: 30px; /* Aumenta o espaço entre os cards no PC */
+    }
+
+    .card {
+        width: 220px; /* Volta os cards para um tamanho fixo compacto lado a lado */
+    }
+
+    .card img {
+        width: 90px;
+        height: 120px;
+    }
+
+    .buttons button {
+        padding: 10px; /* Reduz o tamanho do botão pois no PC usa-se o mouse */
+        font-size: 1rem;
+    }
 }
