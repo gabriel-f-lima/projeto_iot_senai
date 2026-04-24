@@ -50,6 +50,10 @@ function ligarLampadaSala() {
     lampada.classList.remove("desligada");
     lampada.classList.add("ligada");
 
+    if ("vibrate" in navigator) {
+            navigator.vibrate(200); 
+        }
+        
     const msg = new Paho.MQTT.Message('');
     msg.destinationName = "senai510/lampada/sala/ligar";
     clientWeb.send(msg);
@@ -65,6 +69,10 @@ function desligarLampadaSala() {
     statuslampada.textContent = "Lâmpada desligada";
     lampada.classList.remove("ligada");
     lampada.classList.add("desligada");
+
+    if ("vibrate" in navigator) {
+            navigator.vibrate(200); 
+        }
 
     const msg = new Paho.MQTT.Message('');
     msg.destinationName = "senai510/lampada/sala/desligar";
@@ -83,6 +91,10 @@ function ligarLampadaQuarto1() {
     lampada.classList.remove("desligada");
     lampada.classList.add("ligada");
 
+    if ("vibrate" in navigator) {
+            navigator.vibrate(200); 
+        }
+
     const msg = new Paho.MQTT.Message('');
     msg.destinationName = "senai510/lampada/quarto1/ligar";
     clientWeb.send(msg);
@@ -98,6 +110,10 @@ function desligarLampadaQuarto1() {
     statuslampada.textContent = "Lâmpada desligada";
     lampada.classList.remove("ligada");
     lampada.classList.add("desligada");
+
+    if ("vibrate" in navigator) {
+            navigator.vibrate(200); 
+        }
 
     const msg = new Paho.MQTT.Message('');
     msg.destinationName = "senai510/lampada/quarto1/desligar";
@@ -116,6 +132,10 @@ function ligarLampadaQuarto2() {
     lampada.classList.remove("desligada");
     lampada.classList.add("ligada");
 
+    if ("vibrate" in navigator) {
+            navigator.vibrate(200); 
+        }
+
     const msg = new Paho.MQTT.Message('');
     msg.destinationName = "senai510/lampada/quarto2/ligar";
     clientWeb.send(msg);
@@ -131,6 +151,10 @@ function desligarLampadaQuarto2() {
     statuslampada.textContent = "Lâmpada desligada";
     lampada.classList.remove("ligada");
     lampada.classList.add("desligada");
+
+    if ("vibrate" in navigator) {
+            navigator.vibrate(200); 
+        }
 
     const msg = new Paho.MQTT.Message('');
     msg.destinationName = "senai510/lampada/quarto2/desligar";
@@ -149,6 +173,10 @@ function ligarLampadaCozinha() {
     lampada.classList.remove("desligada");
     lampada.classList.add("ligada");
 
+    if ("vibrate" in navigator) {
+            navigator.vibrate(200); 
+        }
+
     const msg = new Paho.MQTT.Message('');
     msg.destinationName = "senai510/lampada/cozinha/ligar";
     clientWeb.send(msg);
@@ -164,6 +192,10 @@ function desligarLampadaCozinha() {
     statuslampada.textContent = "Lâmpada desligada";
     lampada.classList.remove("ligada");
     lampada.classList.add("desligada");
+
+    if ("vibrate" in navigator) {
+            navigator.vibrate(200); 
+        }
 
     const msg = new Paho.MQTT.Message('');
     msg.destinationName = "senai510/lampada/cozinha/desligar";
@@ -181,7 +213,10 @@ function ligarTodas() {
         lampada.classList.remove("desligada");
         lampada.classList.add("ligada");
     });
-    
+
+    if ("vibrate" in navigator) {
+            navigator.vibrate(200); 
+        }
     const msg = new Paho.MQTT.Message('');
     msg.destinationName = "senai510/lampada/ligar";
     clientWeb.send(msg);
@@ -197,6 +232,10 @@ function desligarTodas() {
         lampada.classList.remove("ligada");
         lampada.classList.add("desligada");
     });
+
+    if ("vibrate" in navigator) {
+            navigator.vibrate(200); 
+        }
     
     const msg = new Paho.MQTT.Message('');
     msg.destinationName = "senai510/lampada/desligar";
